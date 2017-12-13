@@ -3,20 +3,20 @@
 
 # This will enable test on the future
 # and also added it depdendencies
-%global with_test 0 
+%global with_test 0
 
 Name: rubygem-%{gem_name}
-Version: 2.0.5
-Release: 4%{?dist}
+Version: 3.0.1
+Release: 1%{?dist}
 Summary: Domain name parser based on the Public Suffix List
-# MPLv2.0: %%{gem_instdir}/data/list.txt
-License: MIT and MPLv2.0
+License: MIT
 URL: https://simonecarletti.com/code/publicsuffix-ruby
 Source0: https://rubygems.org/gems/%{gem_name}-%{version}.gem
 BuildRequires: ruby(release)
 BuildRequires: rubygems-devel
-BuildRequires: ruby
+Requires: ruby >= 2.1
 %if 0%{?with_test}
+BuildRequires: ruby >= 2.1
 BuildRequires: rubygem(minitest)
 BuildRequires: rubygem(mocha)
 %endif
@@ -79,9 +79,10 @@ popd
 %dir %{gem_instdir}
 %exclude %{gem_instdir}/.*
 %license %{gem_instdir}/LICENSE.txt
+%{gem_instdir}/bin
 %{gem_instdir}/data
 %{gem_libdir}
-%exclude %{gem_instdir}/public_suffix.gemspec
+%exclude %{gem_instdir}/%{gem_name}.gemspec
 %exclude %{gem_cache}
 %{gem_spec}
 
@@ -95,6 +96,9 @@ popd
 %{gem_instdir}/test
 
 %changelog
+* Thu Dec 07 2017 Richard Megginson <rmeggins@redhat.com> - 3.0.1-1
+- version 3.0.1
+
 * Mon Oct 23 2017 Juan Badia Payno <jbadiapa@redhat.com> - 2.0.5-4
 - Imported to CentOS
  
